@@ -2,6 +2,8 @@
 
 #define Kp 0.055
 #define Kd 2.6
+// I have made the Ki value to 0, because it doesnot impact much on the code or the test run of the vehicle.
+
 #define rightMaxSpeed 180
 #define leftMaxSpeed 180
 #define rightBaseSpeed 50
@@ -14,7 +16,9 @@
 #define leftMotor2 5
 #define leftMotorPWM 3  
 
-#define buttonPin 2 // Change this to the pin you connect the push button to
+#define buttonPin 2 // Change this to the pin you connect the push button 
+// This push button is used to start or stop the vehicle, press is once to start and again press once to stop.
+// connect the pin 2 with ground with a swtich. if you have any confusion then refer the connection diagram.
 
 QTRSensors qtr;
 
@@ -72,8 +76,10 @@ void loop()
 
   if (isRunning)
   {
-    unsigned int position = qtr.readLineBlack(sensorValues);
-    int error = position - 3500;
+    unsigned int position = qtr.readLineBlack(sensorValues)-500;// adjust the subtracted values to get a tuned calibration.
+    //you can also use the sensor calibration code to test the values from the qtr sensor
+    int error = position - 4000;// then add the difference in it. The default value was 3500 as I have subtracted 500 from the
+    // sensor value so I have added it to the sensor error position value.
     int motorSpeed = Kp * error + Kd * (error - lastError);
     lastError = error;
     int rightMotorSpeed = rightBaseSpeed + motorSpeed;
