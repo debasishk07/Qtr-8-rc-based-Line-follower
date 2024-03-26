@@ -6,12 +6,14 @@
 
 #define rightMaxSpeed 180
 #define leftMaxSpeed 180
+
 #define rightBaseSpeed 50
 #define leftBaseSpeed 50
 
 #define rightMotor1 11
 #define rightMotor2 12
 #define rightMotorPWM 9
+
 #define leftMotor1 6
 #define leftMotor2 5
 #define leftMotorPWM 3  
